@@ -3,109 +3,164 @@ import { SlidersHorizontal } from 'lucide-react';
 
 /**
  * BloodPressureCard
+ * Displays blood pressure waveform chart, Friday/Thursday reading, current badge ("180/120"),
+ * average reading ("160/110"), and trend indicator ("+10°").
  */
-export const BloodPressureCard = ({ day, currentReading, averageReading, trend, isHigh }) => {
+export function BloodPressureCard({
+  day = "Friday",
+  currentReading = "180/120",
+  averageReading = "160/110",
+  trend = "+10°",
+  isHigh = true
+}) {
   return (
-    <div className="bg-white rounded-[24px] p-5 border border-[#E8E6DF] shadow-xs flex flex-col justify-between h-full min-h-[170px] w-full max-w-[340px] interactive-hover">
-      {/* Header */}
+    <div className="bg-white rounded-[22px] p-5 border border-[#E8E6DF] shadow-xs flex flex-col justify-between gap-4">
+      {/* Card Header */}
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-bold text-[#1E1E1E] font-sans">Blood Pressure</h3>
-        <button className="text-[#7D7D7D] hover:text-black transition-colors cursor-pointer">
-          <SlidersHorizontal size={14} strokeWidth={2} />
+        <h3 className="text-[16px] font-bold text-[#202020] tracking-tight">
+          Blood Pressure
+        </h3>
+        <button
+          type="button"
+          className="text-[#7D7D7D] hover:text-[#202020] transition-colors"
+          aria-label="Settings"
+        >
+          <SlidersHorizontal className="w-4 h-4" />
         </button>
       </div>
 
-      {/* Graph Area */}
-      <div className="relative my-2 h-[60px] w-full flex flex-col justify-center">
-        <span className="text-[10px] text-[#7D7D7D] text-center block mb-0.5">{day}</span>
-        <div className="relative w-full h-[40px] flex items-center justify-center">
-          {/* Subtle SVG baseline waveform */}
-          <svg className="w-full h-full overflow-visible" viewBox="0 0 200 40" preserveAspectRatio="none">
-            <path
-              d="M 0 20 Q 20 10, 40 20 T 80 20 T 120 15 T 160 25 T 200 20"
-              fill="none"
-              stroke="#E0DED6"
-              strokeWidth="2"
-            />
-            {/* Highlight area */}
-            <path
-              d="M 60 20 Q 80 5, 100 12 T 140 20 L 140 30 L 60 30 Z"
-              fill="#E8EB2A"
-              opacity="0.6"
-            />
-          </svg>
+      {/* Chart Visual Surface */}
+      <div className="relative h-20 w-full flex items-center justify-center my-1">
+        {/* Day Label */}
+        <span className="absolute -top-1 left-1/2 -translate-x-1/2 text-[11px] font-semibold text-[#7D7D7D]">
+          {day}
+        </span>
 
-          {/* Floating dark badge for reading */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#1E1E1E] text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow-md">
-            {currentReading}
-          </div>
+        {/* SVG Chart Line & Highlight Area */}
+        <svg className="w-full h-full overflow-visible" viewBox="0 0 200 60" preserveAspectRatio="none">
+          {/* Baseline Waveform */}
+          <path
+            d="M 0 35 Q 40 42, 80 30 T 160 38 T 200 32"
+            fill="none"
+            stroke="#D9D7D1"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+
+          {/* Highlight Yellow Peak Area */}
+          <path
+            d="M 60 32 Q 90 12, 120 30 L 120 38 Q 90 38, 60 38 Z"
+            fill="#E8EB2A"
+            opacity="0.85"
+          />
+
+          <path
+            d="M 60 32 Q 90 12, 120 30"
+            fill="none"
+            stroke="#1E1E1E"
+            strokeWidth="2"
+          />
+        </svg>
+
+        {/* Floating Reading Badge */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#1E1E1E] text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow-md tracking-wider">
+          {currentReading}
         </div>
       </div>
 
-      {/* Footer / Stats */}
-      <div className="flex items-center justify-between text-xs pt-1 border-t border-neutral-100">
-        <span className="text-[#7D7D7D]">
-          Average: <strong className="text-[#1E1E1E] font-semibold">{averageReading}</strong>
-        </span>
-        <span className={`font-semibold ${isHigh ? 'text-[#1E1E1E]' : 'text-emerald-600'}`}>
+      {/* Card Footer Details */}
+      <div className="flex items-center justify-between pt-1 border-t border-[#F0EEE6]">
+        <div className="flex items-baseline gap-1.5">
+          <span className="text-[12px] font-medium text-[#7D7D7D]">Average:</span>
+          <span className="text-[13px] font-bold text-[#202020]">{averageReading}</span>
+        </div>
+
+        <span className={`text-[13px] font-bold ${isHigh ? 'text-[#202020]' : 'text-[#202020]'}`}>
           {trend}
         </span>
       </div>
     </div>
   );
-};
+}
 
 /**
  * SymptomsCard
+ * Card showing Headache symptom severity and human body silhouette with highlighted focal area.
  */
-export const SymptomsCard = () => {
+export function SymptomsCard() {
   return (
-    <div className="bg-white rounded-[24px] p-5 border border-[#E8E6DF] shadow-xs flex flex-col justify-between h-full min-h-[150px] w-full max-w-[340px] interactive-hover">
+    <div className="bg-white rounded-[22px] p-5 border border-[#E8E6DF] shadow-xs flex flex-col justify-between gap-4">
+      {/* Card Header */}
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-bold text-[#1E1E1E]">Symptoms</h3>
-        <button className="text-[#7D7D7D] hover:text-black transition-colors cursor-pointer">
-          <SlidersHorizontal size={14} strokeWidth={2} />
+        <h3 className="text-[16px] font-bold text-[#202020] tracking-tight">
+          Symptoms
+        </h3>
+        <button
+          type="button"
+          className="text-[#7D7D7D] hover:text-[#202020] transition-colors"
+          aria-label="Settings"
+        >
+          <SlidersHorizontal className="w-4 h-4" />
         </button>
       </div>
 
-      <div className="flex items-center justify-between my-2">
-        <div>
-          <span className="text-xs font-semibold text-[#1E1E1E] block">Headache</span>
-          <span className="text-[11px] text-[#7D7D7D]">Mild intensity</span>
+      {/* Symptoms Visual Area */}
+      <div className="flex items-center justify-between my-1">
+        {/* Symptom Info */}
+        <div className="flex flex-col gap-1">
+          <span className="text-[14px] font-bold text-[#202020]">
+            Headache
+          </span>
+          <span className="text-[12px] font-medium text-[#7D7D7D]">
+            Mild intensity
+          </span>
         </div>
 
-        {/* Stylized minimal torso graphic with active symptom marker */}
-        <div className="relative w-12 h-12 bg-neutral-50 rounded-full border border-neutral-100 flex items-center justify-center">
-          <div className="w-6 h-8 border-2 border-neutral-300 rounded-lg relative flex justify-center">
-            <div className="w-2.5 h-2.5 bg-[#E8EB2A] rounded-full border border-black absolute -top-1 animate-pulse" />
-          </div>
+        {/* Human Silhouette Graphic with Glowing Accent Dot */}
+        <div className="relative w-14 h-20 flex items-center justify-center">
+          <svg className="w-full h-full text-[#E0DDD5]" viewBox="0 0 50 80" fill="currentColor">
+            {/* Minimalist Body Silhouette */}
+            <circle cx="25" cy="12" r="8" />
+            <path d="M 15 24 C 15 22, 35 22, 35 24 L 38 48 C 38 50, 34 50, 33 48 L 30 78 L 26 78 L 26 52 L 24 52 L 24 78 L 20 78 L 17 48 C 16 50, 12 50, 12 48 Z" />
+          </svg>
+
+          {/* Focal Yellow Highlight Dot at Chest/Neck */}
+          <div className="absolute top-[22px] left-[23px] w-3 h-3 rounded-full bg-[#E8EB2A] border-2 border-black shadow-xs animate-pulse" />
         </div>
       </div>
     </div>
   );
-};
+}
 
 /**
  * EcgCard
+ * Displays ECG rhythm trace waveform line on clean white background.
  */
-export const EcgCard = () => {
+export function EcgCard() {
   return (
-    <div className="bg-white rounded-[24px] p-5 border border-[#E8E6DF] shadow-xs flex flex-col justify-between h-full min-h-[150px] w-full max-w-[340px] interactive-hover">
+    <div className="bg-white rounded-[22px] p-5 border border-[#E8E6DF] shadow-xs flex flex-col justify-between gap-4">
+      {/* Card Header */}
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-bold text-[#1E1E1E]">ECG</h3>
-        <button className="text-[#7D7D7D] hover:text-black transition-colors cursor-pointer">
-          <SlidersHorizontal size={14} strokeWidth={2} />
+        <h3 className="text-[16px] font-bold text-[#202020] tracking-tight">
+          ECG
+        </h3>
+        <button
+          type="button"
+          className="text-[#7D7D7D] hover:text-[#202020] transition-colors"
+          aria-label="Settings"
+        >
+          <SlidersHorizontal className="w-4 h-4" />
         </button>
       </div>
 
-      {/* Realistic ECG Waveform */}
-      <div className="h-[50px] w-full my-1 flex items-center">
-        <svg className="w-full h-full" viewBox="0 0 200 40" preserveAspectRatio="none">
+      {/* ECG Trace Line */}
+      <div className="h-20 w-full flex items-center justify-center my-1 overflow-hidden">
+        <svg className="w-full h-12" viewBox="0 0 240 40" preserveAspectRatio="none">
           <path
-            d="M 0 20 L 30 20 L 35 15 L 40 25 L 45 5 L 50 35 L 55 20 L 80 20 L 85 18 L 90 22 L 95 20 L 120 20 L 125 15 L 130 25 L 135 5 L 140 35 L 145 20 L 200 20"
+            d="M 0 20 L 40 20 L 48 20 L 52 8 L 58 34 L 64 2 L 70 24 L 74 20 L 110 20 L 150 20 L 158 20 L 162 8 L 168 34 L 174 2 L 180 24 L 184 20 L 240 20"
             fill="none"
             stroke="#1E1E1E"
-            strokeWidth="1.8"
+            strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
@@ -113,4 +168,6 @@ export const EcgCard = () => {
       </div>
     </div>
   );
-};
+}
+
+export default BloodPressureCard;

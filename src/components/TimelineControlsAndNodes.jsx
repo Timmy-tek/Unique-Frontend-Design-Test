@@ -1,40 +1,60 @@
 import React from 'react';
 import { ChevronUp, ChevronDown, Plus, Pill } from 'lucide-react';
 
-export const TimelineControlsAndNodes = () => {
+/**
+ * TimelineControlsAndNodes
+ * Vertical scroll controls (Up / Down arrows) and floating action button (+).
+ */
+export function TimelineControlsAndNodes() {
   return (
     <>
-      {/* Floating Action Button (Top Right) */}
-      <button
-        aria-label="Add item"
-        className="absolute top-6 right-6 sm:top-8 sm:right-8 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#2B2B2B] text-white flex items-center justify-center shadow-lg hover:bg-black hover:scale-105 transition-all duration-200 z-30 cursor-pointer"
-      >
-        <Plus size={22} strokeWidth={2} />
-      </button>
-
-      {/* Floating Vertical Direction Controls (Left side) */}
-      <div className="hidden md:flex flex-col gap-1.5 bg-white p-1.5 rounded-2xl shadow-sm border border-[#E8E6DF] absolute left-3 top-1/2 -translate-y-1/2 z-20">
-        <button aria-label="Up" className="p-1.5 hover:bg-neutral-100 rounded-xl text-[#55534E] transition-colors cursor-pointer">
-          <ChevronUp size={16} strokeWidth={2.5} />
+      {/* Vertical Navigation Controls (Left side) */}
+      <div className="absolute -left-3 top-1/2 -translate-y-1/2 z-20 flex flex-col items-center bg-white rounded-full p-1 border border-[#E8E6DF] shadow-md">
+        <button
+          type="button"
+          className="w-7 h-7 flex items-center justify-center text-[#7D7D7D] hover:text-[#202020] transition-colors cursor-pointer"
+          aria-label="Scroll Up"
+        >
+          <ChevronUp className="w-4 h-4 stroke-[2.5]" />
         </button>
-        <button aria-label="Down" className="p-1.5 hover:bg-neutral-100 rounded-xl text-[#55534E] transition-colors cursor-pointer">
-          <ChevronDown size={16} strokeWidth={2.5} />
+        <div className="w-4 h-[1px] bg-[#E8E6DF] my-0.5" />
+        <button
+          type="button"
+          className="w-7 h-7 flex items-center justify-center text-[#7D7D7D] hover:text-[#202020] transition-colors cursor-pointer"
+          aria-label="Scroll Down"
+        >
+          <ChevronDown className="w-4 h-4 stroke-[2.5]" />
+        </button>
+      </div>
+
+      {/* Floating Plus Action Button (Top Right of Timeline) */}
+      <div className="absolute right-2 top-0 z-20">
+        <button
+          type="button"
+          className="w-11 h-11 rounded-full bg-[#2B2B2B] hover:bg-black text-white flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          aria-label="Add Medical Record"
+        >
+          <Plus className="w-5 h-5 stroke-[2.5]" />
         </button>
       </div>
     </>
   );
-};
+}
 
-export const MedicationCapsule = ({ name, dose }) => {
+/**
+ * MedicationCapsule
+ * Small floating white medication capsule badge ("Aspirin x2", "Bisoprolol x3").
+ */
+export function MedicationCapsule({ name, dose, icon: Icon = Pill }) {
   return (
-    <div className="inline-flex items-center gap-2 bg-white px-3.5 py-2 rounded-full border border-[#E8E6DF] shadow-xs text-xs font-medium text-[#1E1E1E] interactive-hover">
-      <div className="w-5 h-5 rounded-full bg-neutral-100 flex items-center justify-center text-[#55534E]">
-        <Pill size={12} strokeWidth={2.5} />
-      </div>
-      <span>{name}</span>
-      <span className="bg-[#2B2B2B] text-white text-[10px] font-semibold px-1.5 py-0.5 rounded-full min-w-[20px] text-center">
+    <div className="inline-flex items-center gap-2 bg-white px-3.5 py-1.5 rounded-full border border-[#E8E6DF] shadow-xs text-xs font-medium text-[#202020]">
+      <Icon className="w-3.5 h-3.5 text-[#7D7D7D]" />
+      <span className="font-semibold">{name}</span>
+      <span className="bg-[#55534E] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
         {dose}
       </span>
     </div>
   );
-};
+}
+
+export default TimelineControlsAndNodes;

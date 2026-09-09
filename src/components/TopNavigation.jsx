@@ -1,30 +1,42 @@
-import React from 'react';
-import { Search, FileText, Pill, FlaskConical, Sparkles, Dna } from 'lucide-react';
+import React, { useState } from 'react';
+import { Search, FileText, Pill, TestTube, Sparkles, Dna } from 'lucide-react';
 import { ShapemorphicPill } from './ShapemorphicPill';
 
-const navItems = [
-  { id: 'treatment', label: 'Treatment Dynamics', icon: Search, primary: true },
-  { id: 'visits', label: 'Visits', icon: FileText },
-  { id: 'medications', label: 'Medications', icon: Pill },
-  { id: 'labs', label: 'Labs', icon: FlaskConical },
-  { id: 'allergies', label: 'Allergies', icon: Sparkles },
-  { id: 'genetics', label: 'Genetics', icon: Dna },
-];
+/**
+ * TopNavigation
+ * Floating navigation buttons sitting directly on the dark shell frame (#55534E).
+ * Includes the longer "Treatment Dynamics" search pill and key categories.
+ */
+export function TopNavigation() {
+  const [activeTab, setActiveTab] = useState('Treatment Dynamics');
 
-export const TopNavigation = () => {
+  const navItems = [
+    { label: 'Treatment Dynamics', icon: Search, isSearch: true },
+    { label: 'Visits', icon: FileText },
+    { label: 'Medications', icon: Pill },
+    { label: 'Labs', icon: TestTube },
+    { label: 'Allergies', icon: Sparkles },
+    { label: 'Genetics', icon: Dna },
+  ];
+
   return (
-    <nav className="flex items-center gap-2 sm:gap-2.5 overflow-x-auto py-1 no-scrollbar max-w-full">
+    <nav className="flex items-center flex-wrap gap-2.5">
       {navItems.map((item) => {
-        const Icon = item.icon;
+        const isActive = activeTab === item.label;
         return (
-          <ShapemorphicPill key={item.id} active={item.primary}>
-            <Icon size={15} className="text-[#55534E]" strokeWidth={2} />
-            <span className={item.primary ? 'font-semibold' : 'font-medium text-[#4A4A4A]'}>
-              {item.label}
-            </span>
+          <ShapemorphicPill
+            key={item.label}
+            active={isActive}
+            icon={item.icon}
+            onClick={() => setActiveTab(item.label)}
+            className={item.isSearch ? 'px-6 min-w-[200px] justify-start' : 'px-4.5'}
+          >
+            {item.label}
           </ShapemorphicPill>
         );
       })}
     </nav>
   );
-};
+}
+
+export default TopNavigation;
