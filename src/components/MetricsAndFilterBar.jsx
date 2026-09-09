@@ -1,5 +1,6 @@
 import React from 'react';
 import { SlidersHorizontal } from 'lucide-react';
+import { ShapemorphicPill } from './ShapemorphicPill';
 
 const filterCategories = [
   { id: 'office-visits', label: 'Office Visits', active: true },
@@ -69,22 +70,16 @@ export const MetricsAndFilterBar = () => {
       {/* Secondary Filter Navigation Row */}
       <div className="flex items-center gap-2 sm:gap-2.5 overflow-x-auto py-1 no-scrollbar">
         {/* Sliders / Filter icon pill */}
-        <button className="squircle-pill p-2.5 bg-white text-[#55534E] border border-[#E8E6DF] hover:bg-neutral-50 transition-all cursor-pointer">
+        <button className="w-9 h-9 rounded-full bg-white text-[#55534E] border border-[#E8E6DF] hover:bg-neutral-50 transition-all flex items-center justify-center cursor-pointer shadow-xs">
           <SlidersHorizontal size={15} strokeWidth={2} />
         </button>
 
         {filterCategories.map((cat) => (
-          <button
-            key={cat.id}
-            className={`
-              squircle-pill px-4 py-2 text-xs sm:text-sm font-medium whitespace-nowrap transition-all border cursor-pointer
-              ${cat.active
-                ? 'bg-white text-[#1E1E1E] border-[#E8E6DF] shadow-xs'
-                : 'bg-[#F2F0E8]/70 text-[#8C8A84] border-transparent hover:bg-white/80 hover:text-black'}
-            `}
-          >
-            {cat.label}
-          </button>
+          <ShapemorphicPill key={cat.id} active={cat.active}>
+            <span className={cat.active ? 'text-[#1E1E1E]' : 'text-[#8C8A84]'}>
+              {cat.label}
+            </span>
+          </ShapemorphicPill>
         ))}
       </div>
     </div>
