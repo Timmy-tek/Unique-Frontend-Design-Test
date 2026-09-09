@@ -43,16 +43,22 @@ export function TimelineControlsAndNodes() {
 
 /**
  * MedicationCapsule
- * Small floating white medication capsule badge ("Aspirin x2", "Bisoprolol x3").
+ * Dark gray medication pill container with white circular icon badge on the left
+ * and clean white text ("Aspirin x2", "bisoprolol x3").
  */
 export function MedicationCapsule({ name, dose, icon: Icon = Pill }) {
   return (
-    <div className="inline-flex items-center gap-2 bg-white px-3.5 py-1.5 rounded-full border border-[#E8E6DF] shadow-xs text-xs font-medium text-[#202020]">
-      <Icon className="w-3.5 h-3.5 text-[#7D7D7D]" />
-      <span className="font-semibold">{name}</span>
-      <span className="bg-[#55534E] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
-        {dose}
-      </span>
+    <div className="inline-flex items-center gap-2.5 bg-[#6D6B66] text-white pl-1.5 pr-4 py-1.5 rounded-full border border-[#5E5C57] shadow-sm text-xs font-medium">
+      {/* White Circular Left Badge */}
+      <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center shrink-0">
+        <Icon className="w-3.5 h-3.5 text-[#4A4A4A]" />
+      </div>
+
+      {/* Medication Name & Dose */}
+      <div className="flex items-center gap-1.5">
+        <span className="font-semibold text-[13px] tracking-tight">{name}</span>
+        <span className="text-[12px] text-white/80 font-normal">{dose}</span>
+      </div>
     </div>
   );
 }

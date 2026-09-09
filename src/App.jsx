@@ -7,21 +7,21 @@ import { MetricsAndFilterBar } from './components/MetricsAndFilterBar';
 import { TimelineControlsAndNodes, MedicationCapsule } from './components/TimelineControlsAndNodes';
 import { BloodPressureCard, SymptomsCard, EcgCard } from './components/MedicalCards';
 import { BottomToolbar } from './components/BottomToolbar';
-import { Square } from 'lucide-react';
+import { FileText } from 'lucide-react';
 
 export function App() {
   return (
     <DashboardShell>
       {/* Top Header Section on Dark Frame Shell */}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3">
         {/* Row 1: Top Navigation on Dark Shell + Header Contour */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 py-2 px-2">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 py-1.5 px-2">
           <HeaderContour />
           <TopNavigation />
         </div>
 
         {/* Main Inner White Surface Container */}
-        <div className="bg-[#F7F5EF] rounded-[24px] p-4 sm:p-6 lg:p-8 flex flex-col justify-between gap-6">
+        <div className="bg-[#F7F5EF] rounded-[28px] p-4 sm:p-6 lg:p-7 flex flex-col justify-between gap-6 shadow-inner">
           {/* Row 2: Patient Card + Medical Metrics & Filter Bar */}
           <div className="flex flex-col lg:flex-row items-stretch gap-6">
             <PatientCard />
@@ -29,7 +29,7 @@ export function App() {
           </div>
 
           {/* Main Content Area: Horizontal Medical Timeline */}
-          <div className="relative my-4 flex-1 flex flex-col justify-center">
+          <div className="relative my-2 flex-1 flex flex-col justify-center">
             <TimelineControlsAndNodes />
 
             {/* Timeline Rail Container */}
@@ -43,8 +43,8 @@ export function App() {
                 {/* August Section */}
                 <div className="flex flex-col gap-4 relative">
                   <div className="flex items-center gap-3 bg-[#F7F5EF] pr-3 w-max z-10">
-                    <div className="w-[18px] h-[18px] rounded-full bg-[#E8EB2A] border-2 border-black flex items-center justify-center shadow-xs z-10 cursor-pointer hover:scale-110 transition-transform">
-                      <Square size={8} className="fill-black stroke-none" />
+                    <div className="w-[20px] h-[20px] rounded-full bg-[#E8EB2A] border-2 border-black flex items-center justify-center shadow-xs z-10 cursor-pointer hover:scale-110 transition-transform">
+                      <FileText size={10} className="stroke-black stroke-[2.5]" />
                     </div>
                     <div className="flex items-baseline gap-2">
                       <span className="text-sm font-bold text-[#1E1E1E]">Aug</span>
@@ -52,14 +52,22 @@ export function App() {
                     </div>
                   </div>
 
-                  <div className="absolute left-[8px] top-[24px] bottom-0 w-[2px] bg-[#D9D7D1] z-0" />
+                  {/* SVG Bezier Branching Line for August */}
+                  <svg className="absolute top-[18px] left-[10px] w-24 h-36 pointer-events-none z-0 overflow-visible" viewBox="0 0 96 144">
+                    <path
+                      d="M 0 0 C 0 30, 24 45, 48 45 C 72 45, 80 80, 80 120"
+                      fill="none"
+                      stroke="#55534E"
+                      strokeWidth="1.75"
+                    />
+                  </svg>
 
-                  <div className="pl-6 pt-2 flex flex-col gap-4">
-                    <div>
+                  <div className="pl-8 pt-4 flex flex-col gap-5">
+                    <div className="relative z-10">
                       <MedicationCapsule name="Aspirin" dose="x2" />
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
                       <BloodPressureCard
                         day="Friday"
                         currentReading="180/120"
@@ -75,8 +83,8 @@ export function App() {
                 {/* September Section */}
                 <div className="flex flex-col gap-4 relative">
                   <div className="flex items-center gap-3 bg-[#F7F5EF] pr-3 w-max z-10">
-                    <div className="w-[18px] h-[18px] rounded-full bg-[#E8EB2A] border-2 border-black flex items-center justify-center shadow-xs z-10 cursor-pointer hover:scale-110 transition-transform">
-                      <Square size={8} className="fill-black stroke-none" />
+                    <div className="w-[20px] h-[20px] rounded-full bg-[#E8EB2A] border-2 border-black flex items-center justify-center shadow-xs z-10 cursor-pointer hover:scale-110 transition-transform">
+                      <FileText size={10} className="stroke-black stroke-[2.5]" />
                     </div>
                     <div className="flex items-baseline gap-2">
                       <span className="text-sm font-bold text-[#1E1E1E]">Sep</span>
@@ -84,15 +92,23 @@ export function App() {
                     </div>
                   </div>
 
-                  <div className="absolute left-[8px] top-[24px] bottom-0 w-[2px] bg-[#D9D7D1] z-0" />
+                  {/* SVG Bezier Branching Line for September */}
+                  <svg className="absolute top-[18px] left-[10px] w-24 h-36 pointer-events-none z-0 overflow-visible" viewBox="0 0 96 144">
+                    <path
+                      d="M 0 0 C 0 30, 24 45, 48 45 C 72 45, 80 80, 80 120"
+                      fill="none"
+                      stroke="#55534E"
+                      strokeWidth="1.75"
+                    />
+                  </svg>
 
-                  <div className="pl-6 pt-2 flex flex-col gap-4">
-                    <div className="flex flex-wrap gap-2">
-                      <MedicationCapsule name="Bisoprolol" dose="x3" />
+                  <div className="pl-8 pt-4 flex flex-col gap-5">
+                    <div className="flex flex-col sm:flex-row gap-2.5 relative z-10">
+                      <MedicationCapsule name="bisoprolol" dose="x3" />
                       <MedicationCapsule name="Aspirin" dose="x2" />
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
                       <BloodPressureCard
                         day="Thursday"
                         currentReading="135/92"
@@ -109,7 +125,7 @@ export function App() {
             </div>
           </div>
 
-          {/* Bottom Dock Toolbar */}
+          {/* Bottom Extended Timeline Bar */}
           <BottomToolbar />
         </div>
       </div>
