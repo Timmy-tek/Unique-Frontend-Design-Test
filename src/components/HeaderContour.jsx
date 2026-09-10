@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 /**
  * HeaderContour
@@ -9,7 +9,7 @@ export function HeaderContour({ title = "Cardiology" }) {
   return (
     <div className="relative flex items-center h-[52px]">
       {/* Off-White Surface Badge with Sculpted Corner Transition */}
-      <div className="relative flex items-center bg-[#F7F5EF] h-full pl-3 pr-6 rounded-l-[26px] shadow-xs border-l border-t border-b border-[#E8E6DF]/60 z-10">
+      <div className="relative flex items-center bg-[#F7F5EF] h-full pl-3 pr-44 z-10">
         {/* Close Button */}
         <button
           type="button"
@@ -27,7 +27,7 @@ export function HeaderContour({ title = "Cardiology" }) {
 
       {/* Organic S-Curve Transition into Inner Surface */}
       <svg
-        className="h-full w-12 -ml-[1px] text-[#F7F5EF] pointer-events-none z-10"
+        className="h-full w-24 -ml-[1px] text-[#F7F5EF] pointer-events-none z-10"
         viewBox="0 0 48 52"
         fill="currentColor"
         preserveAspectRatio="none"
